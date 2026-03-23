@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 230 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 25% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 25% 12%;
+
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14% 92%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 340 82% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 89%;
+    --input: 220 13% 89%;
+    --ring: 262 83% 58%;
+
+    --radius: 0.75rem;
+
+    /* Channel colors */
+    --whatsapp: 142 70% 45%;
+    --whatsapp-foreground: 0 0% 100%;
+    --instagram: 330 80% 55%;
+    --instagram-foreground: 0 0% 100%;
+    --messenger: 221 80% 55%;
+    --messenger-foreground: 0 0% 100%;
+
+    /* Status colors (used by Social IA module) */
+    --success: 142 70% 45%;
+    --warning: 45 95% 55%;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(199 89% 48%));
+    --gradient-accent: linear-gradient(135deg, hsl(340 82% 52%), hsl(262 83% 58%));
+    --gradient-sidebar: linear-gradient(180deg, hsl(262 83% 12%), hsl(230 25% 8%));
+    --shadow-card: 0 1px 3px hsl(230 25% 12% / 0.06), 0 4px 12px hsl(230 25% 12% / 0.04);
+    --shadow-elevated: 0 4px 20px hsl(262 83% 58% / 0.12);
+
+    --sidebar-background: 262 83% 12%;
+    --sidebar-foreground: 260 20% 85%;
+    --sidebar-primary: 262 83% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 262 40% 22%;
+    --sidebar-accent-foreground: 260 20% 90%;
+    --sidebar-border: 262 30% 20%;
+    --sidebar-ring: 262 83% 58%;
+  }
+
+  .dark {
+    --background: 230 25% 8%;
+    --foreground: 220 20% 90%;
+
+    --card: 230 22% 11%;
+    --card-foreground: 220 20% 90%;
+
+    --popover: 230 22% 11%;
+    --popover-foreground: 220 20% 90%;
+
+    --primary: 262 83% 62%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 199 89% 52%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 230 18% 16%;
+    --muted-foreground: 220 12% 55%;
+
+    --accent: 340 82% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 230 18% 18%;
+    --input: 230 18% 18%;
+    --ring: 262 83% 62%;
+
+    /* Channel colors stay vivid */
+    --whatsapp: 142 70% 50%;
+    --instagram: 330 80% 60%;
+    --messenger: 221 80% 60%;
+
+    /* Status colors dark */
+    --success: 142 70% 50%;
+    --warning: 45 95% 60%;
+
+    /* Custom tokens - dark */
+    --gradient-primary: linear-gradient(135deg, hsl(262 83% 62%), hsl(199 89% 52%));
+    --gradient-accent: linear-gradient(135deg, hsl(340 82% 56%), hsl(262 83% 62%));
+    --gradient-sidebar: linear-gradient(180deg, hsl(262 83% 8%), hsl(230 25% 5%));
+    --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.2), 0 4px 12px hsl(0 0% 0% / 0.15);
+    --shadow-elevated: 0 4px 20px hsl(262 83% 62% / 0.2);
+
+    --sidebar-background: 262 83% 8%;
+    --sidebar-foreground: 260 20% 80%;
+    --sidebar-primary: 262 83% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 262 40% 18%;
+    --sidebar-accent-foreground: 260 20% 85%;
+    --sidebar-border: 262 30% 15%;
+    --sidebar-ring: 262 83% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border transition-colors duration-200;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  .gradient-sidebar {
+    background: var(--gradient-sidebar);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+}
+
+@layer components {
+  /* Used by OnTheLine pages */
+  .gradient-button {
+    background: var(--gradient-primary);
+    @apply text-primary-foreground font-semibold transition-all duration-300;
+  }
+  .gradient-button:hover {
+    filter: brightness(1.1);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .glass-card {
+    @apply bg-card border border-border rounded-xl;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .status-active {
+    color: hsl(142 70% 45%);
+  }
+  .status-inactive {
+    color: hsl(var(--muted-foreground));
+  }
+}
