@@ -1,6 +1,4 @@
-Perfeito! Vou fazer exatamente isso para você. Vou pegar o **seu código original completo**, manter **todas as suas linhas e formatação exatamente iguais**, e só injetar a lógica das abas mobile onde é necessário.
 
-### 📝 Código Completo Restaurado com Abas Mobile
 
 ```tsx
 import { useState } from "react";
@@ -37,7 +35,6 @@ const CriarComIA = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
-  const [activeTab, setActiveTab] = useState<"form" | "preview">("form");
   const [selectedType, setSelectedType] = useState("reel");
   const [selectedTone, setSelectedTone] = useState("descontraido");
   const [nicho, setNicho] = useState("Gastronomia / Restaurante");
@@ -49,6 +46,7 @@ const CriarComIA = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
   const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"form" | "preview">("form");
 
   const handleSave = async (schedule = false) => {
     if (!generatedContent || !user) return;
@@ -136,30 +134,26 @@ const CriarComIA = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       <AppSidebar />
-      
-      {/* ABAS MOBILE - Só aparece quando isMobile for true */}
-      {isMobile && (
-        <div className="absolute top-14 left-0 right-0 z-50 flex border-b border-border bg-background shadow-sm md:hidden">
-          <button
-            onClick={() => setActiveTab("form")}
-            className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "form" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}
-          >
-            ✦ Formulário
-          </button>
-          <button
-            onClick={() => setActiveTab("preview")}
-            className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "preview" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}
-          >
-            👁 Preview
-          </button>
-        </div>
-      )}
+      <div className={`flex flex-1 overflow-hidden ${isMobile ? "pt-14 flex-col" : ""}`}>
 
-      {/* Container Principal - Com ajuste de scroll para mobile */}
-      <div className={`flex flex-1 flex-col md:flex-row overflow-hidden pt-14 md:pt-0`}>
-        
+        {/* ABAS - só aparece no mobile */}
+        {isMobile && (
+          <div className="flex border-b border-border bg-background flex-shrink-0">
+            <button
+              onClick={() => setActiveTab("form")}
+              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "form" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
+              ✦ Formulário
+            </button>
+            <button
+              onClick={() => setActiveTab("preview")}
+              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "preview" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
+              👁 Preview
+            </button>
+          </div>
+        )}
+
         {/* Left panel */}
-        <div className={`${isMobile && activeTab === "preview" ? "hidden" : "flex"} flex-col w-[420px] border-r border-border overflow-y-auto p-5 space-y-5 flex-shrink-0 md:w-[420px]`}>
+        <div className={`${isMobile ? (activeTab === "form" ? "flex" : "hidden") : "flex"} flex-col ${isMobile ? "w-full flex-1 min-h-0 pb-28" : "w-[420px] flex-shrink-0"} border-r border-border overflow-y-auto p-5 space-y-5`}>
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl font-bold flex items-center gap-2">
               <Sparkles size={20} className="text-primary" />
@@ -218,7 +212,7 @@ const CriarComIA = () => {
             <Input type="datetime-local" value={dataHora} onChange={(e) => setDataHora(e.target.value)} className="bg-muted border-border" />
           </div>
 
-          <Button onClick={handleGenerate} disabled={isGenerating} className="w-full gradient-button border-0 py-5 text-base font-bold rounded-xl disabled:opacity-60 sticky bottom-5">
+          <Button onClick={handleGenerate} disabled={isGenerating} className="w-full gradient-button border-0 py-5 text-base font-bold rounded-xl disabled:opacity-60">
             {isGenerating ? <><Loader2 size={18} className="mr-2 animate-spin" />Gerando...</> : "✦ Gerar com Gemini"}
           </Button>
 
@@ -232,13 +226,10 @@ const CriarComIA = () => {
               </Button>
             </div>
           )}
-          
-          {/* Espaço extra para garantir scroll até o final */}
-          <div className="h-10" />
         </div>
 
         {/* Right panel - Preview */}
-        <div className={`${isMobile && activeTab === "form" ? "hidden" : "flex"} flex-1 flex flex-col p-6 bg-background overflow-y-auto`}>
+        <div className={`${isMobile ? (activeTab === "preview" ? "flex" : "hidden") : "flex"} flex-1 flex-col p-6 bg-background overflow-y-auto`}>
           <div className="flex items-center gap-2 mb-5">
             <Eye size={18} className="text-muted-foreground" />
             <h3 className="font-display text-lg font-semibold">Preview Instagram</h3>
@@ -299,5 +290,5 @@ const CriarComIA = () => {
 export default CriarComIA;
 ```
 
----
+6. **Commit changes**
 
