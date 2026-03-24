@@ -32,6 +32,7 @@ const CriarComIA = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
+  const [activeTab, setActiveTab] = useState<"form" | "preview">("form");
   const [selectedType, setSelectedType] = useState("reel");
   const [selectedTone, setSelectedTone] = useState("descontraido");
   const [nicho, setNicho] = useState("Gastronomia / Restaurante");
@@ -130,9 +131,28 @@ const CriarComIA = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       <AppSidebar />
-      <div className={`flex flex-1 overflow-hidden ${isMobile ? "pt-14" : ""}`}>
-        {/* Left panel */}
-        <div className="w-[420px] border-r border-border overflow-y-auto p-5 space-y-5 flex-shrink-0">
+      <div className={`flex flex-1 overflow-hidden ${isMobile ? "pt-14 flex-col" : "flex-row"}`}>
+        
+        {/* ABAS - só aparece no mobile */}
+        {isMobile && (
+          <div className="flex border-b border-border bg-background flex-shrink-0">
+            <button
+              onClick={() => setActiveTab("form")}
+              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "form" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}
+            >
+              ✦ Formulário
+            </button>
+            <button
+              onClick={() => setActiveTab("preview")}
+              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "preview" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}
+            >
+              👁 Preview
+            </button>
+          </div>
+        )}
+
+        {/* Left panel - Formulário */}
+        <div className={`${isMobile ? (activeTab === "form" ? "flex" : "hidden") : "flex"} flex-col w-full md:w-[420px] border-r border-border overflow-y-auto p-5 space-y-5 flex-shrink-0`}>
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl font-bold flex items-center gap-2">
               <Sparkles size={20} className="text-primary" />
@@ -208,7 +228,7 @@ const CriarComIA = () => {
         </div>
 
         {/* Right panel - Preview */}
-        <div className="flex-1 flex flex-col p-6 bg-background overflow-y-auto">
+        <div className={`${isMobile ? (activeTab === "preview" ? "flex" : "hidden") : "flex"} flex-1 flex-col p-6 bg-background overflow-y-auto`}>
           <div className="flex items-center gap-2 mb-5">
             <Eye size={18} className="text-muted-foreground" />
             <h3 className="font-display text-lg font-semibold">Preview Instagram</h3>
