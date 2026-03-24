@@ -1,6 +1,3 @@
-
-
-```tsx
 import { useState } from "react";
 import { Sparkles, Eye, Film, Image, Circle, LayoutGrid, Heart, MessageCircle, Send, Bookmark, Loader2, Save, Calendar } from "lucide-react";
 import { AppSidebar } from "@/components/AppSidebar";
@@ -35,6 +32,9 @@ const CriarComIA = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
+  
+  const [activeTab, setActiveTab] = useState<"form" | "preview">("form");
+
   const [selectedType, setSelectedType] = useState("reel");
   const [selectedTone, setSelectedTone] = useState("descontraido");
   const [nicho, setNicho] = useState("Gastronomia / Restaurante");
@@ -46,7 +46,6 @@ const CriarComIA = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
   const [mediaPreview, setMediaPreview] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"form" | "preview">("form");
 
   const handleSave = async (schedule = false) => {
     if (!generatedContent || !user) return;
@@ -132,29 +131,35 @@ const CriarComIA = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden flex-col">
       <AppSidebar />
-      <div className={`flex flex-1 overflow-hidden ${isMobile ? "pt-14 flex-col" : ""}`}>
-
-        {/* ABAS - só aparece no mobile */}
+      
+      <div className={`flex flex-1 flex-col md:flex-row pt-14 md:pt-0 relative`}>
+        
         {isMobile && (
-          <div className="flex border-b border-border bg-background flex-shrink-0">
+          <div className="absolute top-0 left-0 right-0 z-40 flex border-b border-border bg-background shadow-sm md:hidden">
             <button
               onClick={() => setActiveTab("form")}
-              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "form" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
+              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "form" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}
+            >
               ✦ Formulário
             </button>
             <button
               onClick={() => setActiveTab("preview")}
-              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "preview" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
+              className={`flex-1 py-3 text-sm font-bold transition-all ${activeTab === "preview" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}
+            >
               👁 Preview
             </button>
           </div>
         )}
 
-        {/* Left panel */}
-        <div className={`${isMobile ? (activeTab === "form" ? "flex" : "hidden") : "flex"} flex-col ${isMobile ? "w-full flex-1 min-h-0 pb-28" : "w-[420px] flex-shrink-0"} border-r border-border overflow-y-auto p-5 space-y-5`}>
-          <div className="flex items-center justify-between">
+        <div 
+          className={`${
+            isMobile && activeTab === "preview" ? "hidden" : "block"
+          } w-full md:w-[420px] border-r border-border overflow-y-auto p-5 space-y-5`}
+          style={{ height: '100vh', paddingBottom: '80px' }}
+        >
+          <div className="flex items-center justify-between pb-5 border-b border-border">
             <h2 className="font-display text-xl font-bold flex items-center gap-2">
               <Sparkles size={20} className="text-primary" />
               Criar com IA
@@ -212,7 +217,7 @@ const CriarComIA = () => {
             <Input type="datetime-local" value={dataHora} onChange={(e) => setDataHora(e.target.value)} className="bg-muted border-border" />
           </div>
 
-          <Button onClick={handleGenerate} disabled={isGenerating} className="w-full gradient-button border-0 py-5 text-base font-bold rounded-xl disabled:opacity-60">
+          <Button onClick={handleGenerate} disabled={isGenerating} className="w-full gradient-button border-0 py-5 text-base font-bold rounded-xl disabled:opacity-60 mb-5">
             {isGenerating ? <><Loader2 size={18} className="mr-2 animate-spin" />Gerando...</> : "✦ Gerar com Gemini"}
           </Button>
 
@@ -226,10 +231,16 @@ const CriarComIA = () => {
               </Button>
             </div>
           )}
+          
+          <div className="h-20" />
         </div>
 
-        {/* Right panel - Preview */}
-        <div className={`${isMobile ? (activeTab === "preview" ? "flex" : "hidden") : "flex"} flex-1 flex-col p-6 bg-background overflow-y-auto`}>
+        <div 
+          className={`${
+            isMobile && activeTab === "form" ? "hidden" : "flex"
+          } flex-1 flex flex-col p-6 bg-background overflow-y-auto`}
+          style={{ height: '100vh' }}
+        >
           <div className="flex items-center gap-2 mb-5">
             <Eye size={18} className="text-muted-foreground" />
             <h3 className="font-display text-lg font-semibold">Preview Instagram</h3>
@@ -288,7 +299,3 @@ const CriarComIA = () => {
 };
 
 export default CriarComIA;
-```
-
-6. **Commit changes**
-
