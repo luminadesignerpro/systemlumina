@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Pixel blocks - black -->
+  <rect x="20" y="10" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="26" y="10" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="32" y="10" width="6" height="6" fill="#1a1a1a"/>
+  
+  <rect x="14" y="16" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="20" y="16" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="32" y="16" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="38" y="16" width="6" height="6" fill="#c9a84c"/>
+  
+  <rect x="14" y="22" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="20" y="22" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="26" y="22" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="32" y="22" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="38" y="22" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="44" y="14" width="4" height="4" fill="#c9a84c"/>
+
+  <rect x="14" y="28" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="32" y="28" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="38" y="28" width="6" height="6" fill="#1a1a1a"/>
+
+  <rect x="20" y="34" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="26" y="34" width="6" height="6" fill="#1a1a1a"/>
+  <rect x="32" y="34" width="6" height="6" fill="#c9a84c"/>
+  <rect x="44" y="34" width="4" height="4" fill="#c9a84c"/>
+
+  <!-- Star/light burst in center -->
+  <!-- Horizontal ray -->
+  <rect x="22" y="27" width="20" height="2" fill="url(#starGlow)" opacity="0.9"/>
+  <!-- Vertical ray -->
+  <rect x="30" y="19" width="2" height="20" fill="url(#starGlowV)" opacity="0.9"/>
+  <!-- Diagonal rays -->
+  <line x1="24" y1="21" x2="38" y2="35" stroke="url(#diagGlow)" stroke-width="1.5" opacity="0.7"/>
+  <line x1="38" y1="21" x2="24" y2="35" stroke="url(#diagGlow2)" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Bright center -->
+  <circle cx="31" cy="28" r="3" fill="white" opacity="0.95"/>
+  <circle cx="31" cy="28" r="1.5" fill="#FFD700"/>
+
+  <defs>
+    <linearGradient id="starGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="starGlowV" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="diagGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="diagGlow2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+</svg>
