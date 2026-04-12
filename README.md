@@ -1,177 +1,409 @@
-# Supabase CLI
+# 🚀 SystemLumina - CRM + Social Media IA Platform
 
-[![Coverage Status](https://coveralls.io/repos/github/supabase/cli/badge.svg?branch=develop)](https://coveralls.io/github/supabase/cli?branch=develop) [![Bitbucket Pipelines](https://img.shields.io/bitbucket/pipelines/supabase-cli/setup-cli/master?style=flat-square&label=Bitbucket%20Canary)](https://bitbucket.org/supabase-cli/setup-cli/pipelines) [![Gitlab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/sweatybridge%2Fsetup-cli?label=Gitlab%20Canary)
-](https://gitlab.com/sweatybridge/setup-cli/-/pipelines)
+![SystemLumina](https://img.shields.io/badge/SystemLumina-v2.0-blue)
+![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript)
+![Supabase](https://img.shields.io/badge/Supabase-2.0-3ECF8E?logo=supabase)
 
-[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools.
+**SystemLumina** é uma plataforma completa de CRM e gerenciamento de redes sociais com inteligência artificial integrada. Gerencie conversas multi-canal (WhatsApp, Instagram, Messenger), automatize publicações em redes sociais e potencialize seu atendimento com IA.
 
-This repository contains all the functionality for Supabase CLI.
+---
 
-- [x] Running Supabase locally
-- [x] Managing database migrations
-- [x] Creating and deploying Supabase Functions
-- [x] Generating types directly from your database schema
-- [x] Making authenticated HTTP requests to [Management API](https://supabase.com/docs/reference/api/introduction)
+## ✨ Funcionalidades Principais
 
-## Getting started
+### 📱 **Mensageria Unificada**
+- ✅ WhatsApp Business API integrado
+- ✅ Instagram Direct Messages
+- ✅ Facebook Messenger
+- ✅ Interface única para todos os canais
+- ✅ Respostas em tempo real
+- ✅ Status de leitura e entrega
+- ✅ Suporte a mídia (imagens, vídeos, documentos)
 
-### Install the CLI
+### 📊 **CRM Completo**
+- Gestão de leads com pipeline visual
+- Filtros avançados por canal, status e tags
+- Exportação de dados
+- Analytics e métricas
+- Atribuição de leads para equipe
 
-Available via [NPM](https://www.npmjs.com) as dev dependency. To install:
+### 🤖 **Automação & IA**
+- Agentes de IA para atendimento
+- Chatbots configuráveis
+- Respostas automáticas
+- Geração de conteúdo com IA
+- Fluxos de automação personalizados
+
+### 📲 **Social Media Management**
+- Agendamento de posts (Instagram, Facebook)
+- Criação de conteúdo com IA
+- Calendário visual de publicações
+- Analytics de desempenho
+- Suporte a Stories e Reels
+
+### 📧 **Email Marketing**
+- Campanhas de e-mail
+- Templates personalizáveis
+- Segmentação de público
+
+---
+
+## 🏗️ Arquitetura Técnica
+
+### **Frontend**
+- **React 18.3** + **TypeScript**
+- **Vite** - Build tool moderno
+- **TailwindCSS** + **Radix UI** - Design system
+- **React Router v6** - Roteamento
+- **TanStack Query (React Query)** - Estado e cache
+- **Framer Motion** - Animações
+- **Shadcn/ui** - Componentes UI
+
+### **Backend**
+- **Supabase** - BaaS (Backend as a Service)
+  - PostgreSQL database
+  - Row Level Security (RLS)
+  - Edge Functions (Deno)
+  - Realtime subscriptions
+  - Authentication
+  - Storage
+
+### **Integrações**
+- **Meta Business API** (WhatsApp, Instagram, Facebook)
+- **OpenAI API** (Geração de conteúdo com IA)
+- **Webhooks** para recebimento de mensagens
+
+---
+
+## 📦 Instalação e Setup
+
+### **Pré-requisitos**
+- Node.js 18+ ou Bun
+- Conta Supabase (gratuita)
+- Conta Meta Business (para WhatsApp/Instagram)
+
+### **1. Clone o Repositório**
+```bash
+git clone https://github.com/luminadesignerpro/systemlumina.git
+cd systemlumina
+```
+
+### **2. Instale as Dependências**
+```bash
+# Com npm
+npm install
+
+# Com yarn
+yarn install
+
+# Com bun (recomendado)
+bun install
+```
+
+### **3. Configure as Variáveis de Ambiente**
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```env
+# Supabase
+VITE_SUPABASE_URL=https://seu-project-id.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=sua-anon-key
+VITE_SUPABASE_PROJECT_ID=seu-project-id
+
+# Meta Business (WhatsApp + Instagram)
+META_APP_ID=seu-meta-app-id
+META_APP_SECRET=seu-meta-app-secret
+
+# WhatsApp
+WHATSAPP_WEBHOOK_VERIFY_TOKEN=systemlumina_verify_token_2026
+
+# OpenAI (opcional - para geração de conteúdo)
+OPENAI_API_KEY=sua-openai-key
+```
+
+### **4. Configure o Supabase**
+
+#### **4.1. Crie um Projeto no Supabase**
+1. Acesse [supabase.com](https://supabase.com)
+2. Crie um novo projeto
+3. Copie a URL e a chave pública (anon key)
+
+#### **4.2. Execute as Migrations**
+```bash
+# Instale o Supabase CLI
+npm install -g supabase
+
+# Faça login
+supabase login
+
+# Link com seu projeto
+supabase link --project-ref seu-project-id
+
+# Execute as migrations
+supabase db push
+```
+
+Ou execute manualmente os arquivos SQL em `/supabase/migrations/` no SQL Editor do Supabase.
+
+#### **4.3. Configure as Edge Functions**
 
 ```bash
-npm i supabase --save-dev
+# Deploy das functions
+supabase functions deploy instagram-auth
+supabase functions deploy whatsapp-webhook
+supabase functions deploy whatsapp-send
+supabase functions deploy generate-content
+supabase functions deploy publish-post
+supabase functions deploy check-scheduled
 ```
 
-When installing with yarn 4, you need to disable experimental fetch with the following nodejs config.
-
+Configure os secrets:
+```bash
+supabase secrets set META_APP_ID=seu-app-id
+supabase secrets set META_APP_SECRET=seu-app-secret
+supabase secrets set WHATSAPP_WEBHOOK_VERIFY_TOKEN=systemlumina_verify_token_2026
+supabase secrets set OPENAI_API_KEY=sua-openai-key
 ```
-NODE_OPTIONS=--no-experimental-fetch yarn add supabase
+
+### **5. Inicie o Servidor de Desenvolvimento**
+```bash
+npm run dev
+# ou
+yarn dev
+# ou
+bun dev
 ```
 
-> **Note**
-For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency](https://bun.sh/guides/install/trusted) before running `bun add -D supabase`.
+Acesse `http://localhost:5173`
 
-<details>
-  <summary><b>macOS</b></summary>
+---
 
-  Available via [Homebrew](https://brew.sh). To install:
+## 🔌 Configuração de Integrações
 
-  ```sh
-  brew install supabase/tap/supabase
-  ```
+### **WhatsApp Business API**
 
-  To install the beta release channel:
-  
-  ```sh
-  brew install supabase/tap/supabase-beta
-  brew link --overwrite supabase-beta
-  ```
-  
-  To upgrade:
+#### **Passo 1: Criar App no Meta Business**
+1. Acesse [Meta for Developers](https://developers.facebook.com/apps)
+2. Crie um novo app (tipo: Business)
+3. Adicione o produto "WhatsApp"
+4. Acesse **WhatsApp > API Setup**
 
-  ```sh
-  brew upgrade supabase
-  ```
-</details>
+#### **Passo 2: Obter Credenciais**
+- **Phone Number ID**: Na seção "Phone Numbers"
+- **Access Token**: Gere um token permanente em "Access Tokens"
+- **Business Account ID**: Visível na URL ou na seção "Settings"
 
-<details>
-  <summary><b>Windows</b></summary>
+#### **Passo 3: Configurar Webhook**
+1. Acesse **WhatsApp > Configuration > Webhooks**
+2. Configure:
+   - **Callback URL**: `https://seu-projeto.supabase.co/functions/v1/whatsapp-webhook`
+   - **Verify Token**: `systemlumina_verify_token_2026`
+3. Inscreva-se nos eventos: `messages`, `message_status`
 
-  Available via [Scoop](https://scoop.sh). To install:
+#### **Passo 4: Conectar no SystemLumina**
+1. Faça login no SystemLumina
+2. Vá em **Configurações > WhatsApp**
+3. Cole o **Phone Number ID** e **Access Token**
+4. Clique em **Conectar**
 
-  ```powershell
-  scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
-  scoop install supabase
-  ```
+---
 
-  To upgrade:
+### **Instagram Business API**
 
-  ```powershell
-  scoop update supabase
-  ```
-</details>
+#### **Passo 1: Requisitos**
+- Conta Instagram convertida para Business ou Creator
+- Página do Facebook vinculada à conta Instagram
+- App Meta configurado (mesmo do WhatsApp)
 
-<details>
-  <summary><b>Linux</b></summary>
+#### **Passo 2: Configurar no Meta**
+1. No mesmo app Meta, adicione o produto "Instagram"
+2. Configure permissões:
+   - `instagram_basic`
+   - `instagram_content_publish`
+   - `instagram_manage_insights`
+   - `pages_show_list`
+   - `pages_read_engagement`
 
-  Available via [Homebrew](https://brew.sh) and Linux packages.
+#### **Passo 3: Conectar no SystemLumina**
+1. Vá em **Configurações > Instagram**
+2. Clique em **Conectar com Instagram**
+3. Autorize o acesso
+4. Selecione a página do Facebook vinculada
 
-  #### via Homebrew
+---
 
-  To install:
+## 📊 Estrutura do Banco de Dados
 
-  ```sh
-  brew install supabase/tap/supabase
-  ```
+### **Principais Tabelas**
 
-  To upgrade:
+#### **conversations**
+Armazena todas as conversas multi-canal
+```sql
+- id (uuid, PK)
+- user_id (uuid, FK)
+- contact_name (text)
+- contact_identifier (text) -- telefone, instagram_id, etc
+- channel (text) -- whatsapp, instagram, messenger
+- status (text) -- open, pending, resolved, closed
+- last_message_at (timestamptz)
+- tags (text[])
+```
 
-  ```sh
-  brew upgrade supabase
-  ```
+#### **messages**
+Mensagens de todas as conversas
+```sql
+- id (uuid, PK)
+- conversation_id (uuid, FK)
+- content (text)
+- direction (text) -- incoming, outgoing
+- message_type (text) -- text, image, video, audio
+- status (text) -- sent, delivered, read, failed
+- created_at (timestamptz)
+```
 
-  #### via Linux packages
+#### **whatsapp_connections**
+Conexões do WhatsApp Business
+```sql
+- id (uuid, PK)
+- user_id (uuid, FK)
+- phone_number_id (text)
+- access_token (text)
+- is_active (boolean)
+```
 
-  Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
+#### **instagram_connections**
+Conexões do Instagram
+```sql
+- id (uuid, PK)
+- user_id (uuid, FK)
+- instagram_user_id (text)
+- instagram_username (text)
+- access_token (text)
+- page_id (text)
+```
 
-  ```sh
-  sudo apk add --allow-untrusted <...>.apk
-  ```
+#### **posts**
+Posts agendados/publicados
+```sql
+- id (uuid, PK)
+- user_id (uuid, FK)
+- platform (text) -- instagram, facebook
+- generated_content (text)
+- scheduled_at (timestamptz)
+- status (text) -- rascunho, agendado, publicado
+```
 
-  ```sh
-  sudo dpkg -i <...>.deb
-  ```
+#### **leads**
+CRM - leads e contatos
+```sql
+- id (uuid, PK)
+- user_id (uuid, FK)
+- name (text)
+- email (text)
+- phone (text)
+- stage (text)
+- channel (text)
+- value (numeric)
+```
 
-  ```sh
-  sudo rpm -i <...>.rpm
-  ```
+---
 
-  ```sh
-  sudo pacman -U <...>.pkg.tar.zst
-  ```
-</details>
-
-<details>
-  <summary><b>Other Platforms</b></summary>
-
-  You can also install the CLI via [go modules](https://go.dev/ref/mod#go-install) without the help of package managers.
-
-  ```sh
-  go install github.com/supabase/cli@latest
-  ```
-
-  Add a symlink to the binary in `$PATH` for easier access:
-
-  ```sh
-  ln -s "$(go env GOPATH)/bin/cli" /usr/bin/supabase
-  ```
-
-  This works on other non-standard Linux distros.
-</details>
-
-<details>
-  <summary><b>Community Maintained Packages</b></summary>
-
-  Available via [pkgx](https://pkgx.sh/). Package script [here](https://github.com/pkgxdev/pantry/blob/main/projects/supabase.com/cli/package.yml).
-  To install in your working directory:
-
-  ```bash
-  pkgx install supabase
-  ```
-
-  Available via [Nixpkgs](https://nixos.org/). Package script [here](https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/supabase-cli/default.nix).
-</details>
-
-### Run the CLI
+## 🛠️ Scripts Disponíveis
 
 ```bash
-supabase bootstrap
+# Desenvolvimento
+npm run dev          # Inicia servidor de dev
+npm run build        # Build para produção
+npm run preview      # Preview do build
+npm run lint         # Lint do código
+npm run test         # Executa testes
 ```
 
-Or using npx:
+---
 
+## 🚀 Deploy
+
+### **Frontend (Vercel/Netlify)**
+
+#### **Vercel**
 ```bash
-npx supabase bootstrap
+npm install -g vercel
+vercel --prod
 ```
 
-The bootstrap command will guide you through the process of setting up a Supabase project using one of the [starter](https://github.com/supabase-community/supabase-samples/blob/main/samples.json) templates.
-
-## Docs
-
-Command & config reference can be found [here](https://supabase.com/docs/reference/cli/about).
-
-## Breaking changes
-
-We follow semantic versioning for changes that directly impact CLI commands, flags, and configurations.
-
-However, due to dependencies on other service images, we cannot guarantee that schema migrations, seed.sql, and generated types will always work for the same CLI major version. If you need such guarantees, we encourage you to pin a specific version of CLI in package.json.
-
-## Developing
-
-To run from source:
-
-```sh
-# Go >= 1.22
-go run . help
+#### **Netlify**
+```bash
+npm run build
+netlify deploy --prod --dir=dist
 ```
+
+### **Backend (Supabase)**
+Já está hospedado no Supabase! Apenas certifique-se de que as Edge Functions foram deployadas.
+
+---
+
+## 📝 Roadmap
+
+### **Em Desenvolvimento**
+- [ ] Chatbot com fluxos visuais
+- [ ] Templates de mensagens
+- [ ] Analytics avançado
+- [ ] Integração com Telegram
+- [ ] API pública
+- [ ] App mobile (React Native)
+
+### **Concluído** ✅
+- [x] WhatsApp Business API
+- [x] Instagram Direct Messages
+- [x] Interface de mensagens unificada
+- [x] CRM com pipeline
+- [x] Agendamento de posts
+- [x] Geração de conteúdo com IA
+- [x] Sistema de autenticação
+- [x] Dark/Light mode
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+## 💬 Suporte
+
+- **Documentação**: [Em construção]
+- **Issues**: [GitHub Issues](https://github.com/luminadesignerpro/systemlumina/issues)
+- **Email**: suporte@systemlumina.com
+
+---
+
+## 🙏 Agradecimentos
+
+- [Supabase](https://supabase.com) - Backend as a Service
+- [Shadcn/ui](https://ui.shadcn.com) - Componentes UI
+- [Meta Business](https://business.facebook.com) - WhatsApp & Instagram APIs
+- [OpenAI](https://openai.com) - Geração de conteúdo com IA
+
+---
+
+<div align="center">
+  <p>Feito com ❤️ pela equipe SystemLumina</p>
+  <p>
+    <a href="https://systemlumina.vercel.app">Website</a> •
+    <a href="https://github.com/luminadesignerpro/systemlumina">GitHub</a> •
+    <a href="https://twitter.com/systemlumina">Twitter</a>
+  </p>
+</div>

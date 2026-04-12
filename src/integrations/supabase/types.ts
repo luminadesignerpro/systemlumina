@@ -46,6 +46,36 @@ export type Database = {
         Update: { created_at?: string; enabled?: boolean; id?: string; type?: string; updated_at?: string; user_id?: string }
         Relationships: []
       }
+      whatsapp_connections: {
+        Row: { id: string; user_id: string; phone_number_id: string; business_account_id: string|null; phone_number: string|null; display_name: string|null; access_token: string|null; webhook_verify_token: string|null; is_active: boolean|null; connected_at: string|null; created_at: string; updated_at: string }
+        Insert: { id?: string; user_id: string; phone_number_id: string; business_account_id?: string|null; phone_number?: string|null; display_name?: string|null; access_token?: string|null; webhook_verify_token?: string|null; is_active?: boolean|null; connected_at?: string|null; created_at?: string; updated_at?: string }
+        Update: { id?: string; user_id?: string; phone_number_id?: string; business_account_id?: string|null; phone_number?: string|null; display_name?: string|null; access_token?: string|null; webhook_verify_token?: string|null; is_active?: boolean|null; connected_at?: string|null; created_at?: string; updated_at?: string }
+        Relationships: []
+      }
+      conversations: {
+        Row: { id: string; user_id: string; contact_name: string; contact_identifier: string; channel: string; avatar_url: string|null; status: string; assigned_to: string|null; last_message_at: string|null; tags: string[]|null; metadata: any; created_at: string; updated_at: string }
+        Insert: { id?: string; user_id: string; contact_name: string; contact_identifier: string; channel: string; avatar_url?: string|null; status?: string; assigned_to?: string|null; last_message_at?: string|null; tags?: string[]|null; metadata?: any; created_at?: string; updated_at?: string }
+        Update: { id?: string; user_id?: string; contact_name?: string; contact_identifier?: string; channel?: string; avatar_url?: string|null; status?: string; assigned_to?: string|null; last_message_at?: string|null; tags?: string[]|null; metadata?: any; created_at?: string; updated_at?: string }
+        Relationships: []
+      }
+      messages: {
+        Row: { id: string; conversation_id: string; user_id: string; content: string; direction: string; message_type: string; media_url: string|null; external_id: string|null; status: string; metadata: any; read: boolean|null; created_at: string }
+        Insert: { id?: string; conversation_id: string; user_id: string; content: string; direction: string; message_type?: string; media_url?: string|null; external_id?: string|null; status?: string; metadata?: any; read?: boolean|null; created_at?: string }
+        Update: { id?: string; conversation_id?: string; user_id?: string; content?: string; direction?: string; message_type?: string; media_url?: string|null; external_id?: string|null; status?: string; metadata?: any; read?: boolean|null; created_at?: string }
+        Relationships: []
+      }
+      message_templates: {
+        Row: { id: string; user_id: string; name: string; content: string; category: string|null; variables: string[]|null; created_at: string; updated_at: string }
+        Insert: { id?: string; user_id: string; name: string; content: string; category?: string|null; variables?: string[]|null; created_at?: string; updated_at?: string }
+        Update: { id?: string; user_id?: string; name?: string; content?: string; category?: string|null; variables?: string[]|null; created_at?: string; updated_at?: string }
+        Relationships: []
+      }
+      chatbot_flows: {
+        Row: { id: string; user_id: string; name: string; trigger_keywords: string[]|null; flow_data: any; enabled: boolean|null; channels: string[]|null; created_at: string; updated_at: string }
+        Insert: { id?: string; user_id: string; name: string; trigger_keywords?: string[]|null; flow_data: any; enabled?: boolean|null; channels?: string[]|null; created_at?: string; updated_at?: string }
+        Update: { id?: string; user_id?: string; name?: string; trigger_keywords?: string[]|null; flow_data?: any; enabled?: boolean|null; channels?: string[]|null; created_at?: string; updated_at?: string }
+        Relationships: []
+      }
     }
     Views: { [_ in never]: never }
     Functions: { [_ in never]: never }

@@ -31,6 +31,8 @@ import Historico from "./pages/Historico";
 import Automacoes from "./pages/Automacoes";
 import InstagramConfig from "./pages/InstagramConfig";
 import InstagramCallback from "./pages/InstagramCallback";
+import WhatsAppConfig from "./pages/WhatsAppConfig";
+import Messages from "./pages/Messages";
 
 import NotFound from "./pages/NotFound";
 
@@ -72,6 +74,8 @@ function AnimatedRoutes() {
           <Route path="/historico" element={<ProtectedRoute><Historico /></ProtectedRoute>} />
           <Route path="/automacoes" element={<ProtectedRoute><Automacoes /></ProtectedRoute>} />
           <Route path="/instagram-config" element={<ProtectedRoute><InstagramConfig /></ProtectedRoute>} />
+          <Route path="/whatsapp-config" element={<ProtectedRoute><WhatsAppConfig /></ProtectedRoute>} />
+          <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

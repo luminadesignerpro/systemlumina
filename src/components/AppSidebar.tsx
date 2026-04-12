@@ -1,4 +1,4 @@
-import { Inbox, Users, Bot, BarChart3, Settings, Zap, MessageSquare, Mail, Share2, Menu, X, Moon, Sun, LogOut, Sparkles, Calendar, History, Instagram } from "lucide-react";
+import { Inbox, Users, Bot, BarChart3, Settings, Zap, MessageSquare, Mail, Share2, Menu, X, Moon, Sun, LogOut, Sparkles, Calendar, History, Instagram, Phone } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -13,6 +13,7 @@ interface AppSidebarProps {
 
 const menuItems = [
   { id: "inbox", icon: Inbox, label: "Inbox", path: "/" },
+  { id: "messages", icon: MessageSquare, label: "Mensagens", path: "/messages" },
   { id: "contacts", icon: Users, label: "CRM", path: "/crm" },
   { id: "automation", icon: Zap, label: "Automação", path: "/automation" },
   { id: "ai-agents", icon: Bot, label: "Agentes IA", path: "/ai-agents" },
@@ -25,7 +26,8 @@ const socialItems = [
   { id: "criar", icon: Sparkles, label: "Criar com IA", path: "/criar" },
   { id: "agendar", icon: Calendar, label: "Agendar Posts", path: "/agendar" },
   { id: "historico", icon: History, label: "Histórico", path: "/historico" },
-  { id: "instagram-config", icon: Instagram, label: "Configurar Instagram", path: "/instagram-config" },
+  { id: "instagram-config", icon: Instagram, label: "Instagram", path: "/instagram-config" },
+  { id: "whatsapp-config", icon: Phone, label: "WhatsApp", path: "/whatsapp-config" },
 ];
 
 const bottomItems = [
