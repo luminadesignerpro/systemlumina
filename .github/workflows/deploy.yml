@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Executa sempre que você envia algo para a branch main
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -26,12 +26,15 @@ jobs:
         run: npm install
 
       - name: Build
+        # Esta é a parte que faltava: conectar o código com as Secrets do GitHub
         run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          # Garante que ele pegue a pasta que o Vite gera
           path: dist
 
   deploy:
