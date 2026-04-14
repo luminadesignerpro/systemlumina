@@ -3,7 +3,8 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig(({ mode }) => ({
-  base: "/",
+  // Define o caminho base como o nome do seu repositório para o GitHub Pages
+  base: "/systemlumina/",
   server: {
     host: "::",
     port: 8080,
@@ -18,7 +19,13 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           "vendor-react": ["react", "react-dom", "react-router-dom"],
-          "vendor-ui": ["framer-motion", "@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-popover", "@radix-ui/react-tooltip"],
+          "vendor-ui": [
+            "framer-motion",
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-dropdown-menu",
+            "@radix-ui/react-popover",
+            "@radix-ui/react-tooltip",
+          ],
           "vendor-data": ["@tanstack/react-query", "@supabase/supabase-js"],
           "vendor-charts": ["recharts"],
           "vendor-forms": ["react-hook-form", "@hookform/resolvers", "zod"],
